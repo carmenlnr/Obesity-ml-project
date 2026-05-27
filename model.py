@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report
 
 
 def entrenar_knn(df, target_col, test_size=0.2, random_state=0):
@@ -30,3 +31,22 @@ def entrenar_knn(df, target_col, test_size=0.2, random_state=0):
     print("Test accuracy:", knn.score(X_test_scaled, y_test))
 
     return knn, X_train_scaled, X_test_scaled, y_train, y_test
+
+def entrenar_ensemble(modelo, nombre, X_train, X_test, y_train, y_test, resultados):
+    # Training modelo
+    modelo.fit(X_train, y_train)
+
+    # Evaluar modelo
+    pred = modelo.predict(X_test)
+    print(f"--- {nombre} ---")
+    print("Train accuracy:", modelo.score(X_train, y_train))
+    print("Test accuracy:", modelo.score(X_test, y_test))
+    print(classification_report(y_test, pred))
+
+    # Guardar métricas
+    resultados[nombre] = {
+        "train": round(modelo.score(X_train, y_train) * 100, 1),
+        "test": round(modelo.score(X_test, y_test) * 100, 1)
+    }
+
+    return modelo
