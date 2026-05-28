@@ -50,3 +50,31 @@ def entrenar_ensemble(modelo, nombre, X_train, X_test, y_train, y_test, resultad
     }
 
     return modelo
+
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.metrics import classification_report
+
+def aplicar_tuning(search, nombre, X_train, X_test, y_train, y_test, resultados):
+    
+    # Training
+    search.fit(X_train, y_train)
+    
+    # Mejores parámetros y CV score
+    print(f"--- {nombre} ---")
+    print("Mejores parámetros:", search.best_params_)
+    print("Mejor CV score:", round(search.best_score_ * 100, 1), "%")
+    
+    # Recuperar y evaluar mejor modelo
+    best_model = search.best_estimator_
+    pred = best_model.predict(X_test)
+    print("Train accuracy:", round(best_model.score(X_train, y_train) * 100, 1), "%")
+    print("Test accuracy:", round(best_model.score(X_test, y_test) * 100, 1), "%")
+    print(classification_report(y_test, pred))
+    
+    # Guardar métricas
+    resultados[nombre] = {
+        "train": round(best_model.score(X_train, y_train) * 100, 1),
+        "test": round(best_model.score(X_test, y_test) * 100, 1)
+    }
+    
+    return best_model
