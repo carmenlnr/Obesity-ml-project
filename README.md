@@ -92,8 +92,12 @@ Se aplicó **Grid Search** y **Random Search** sobre ambos para optimizar sus hi
 - Probar grids más amplios en el hyperparameter tuning
 - Construir una app con Streamlit para predecir el nivel de obesidad en tiempo real
 - Explorar más en profundidad la importancia de las features para reducir la dimensionalidad
+- Probar el modelo con datos de población europea, especialmente países mediterráneos como España, Portugal o Francia
 ---
  
 ## 👩‍💻 Autora
  
 Carmen — Data Analytics Bootcamp, Mayo 2026
+
+### Link presentación
+[Link google slides ML Obesidad](https://docs.google.com/presentation/d/1UkmoT2i79t2TbimzNvopK_f_s1O_-PWzcF8OdaXN22Q/edit?usp=sharing)
